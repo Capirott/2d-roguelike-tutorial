@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     public float levelStartDelay = 2f;
     public float turnDelay = 0.1f;
     public static GameManager instance = null;
-    public BoardManager boardScript;
+    private BoardManager boardScript;
     public int playerFoodPoints = 100;
     [HideInInspector]
     public bool playersTurn = true;
@@ -35,9 +35,12 @@ public class GameManager : MonoBehaviour {
         InitGame();
     }
 
-    private void OnLevelWasLoaded(int level)
+    //This is called each time a scene is loaded.
+    void OnLevelWasLoaded(int index)
     {
+        //Add one to our level number.
         level++;
+        //Call InitGame to initialize our level.
         InitGame();
     }
 
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour {
 
     public void GameOver()
     {
-        levelText.text = "After " + level + "days, you starved.";
+        levelText.text = "After " + level + " days, you starved.";
         levelImage.SetActive(true);
         enabled = false;
     }
