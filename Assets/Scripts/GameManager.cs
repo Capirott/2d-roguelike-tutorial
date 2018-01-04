@@ -35,12 +35,9 @@ public class GameManager : MonoBehaviour {
         InitGame();
     }
 
-    //This is called each time a scene is loaded.
     void OnLevelWasLoaded(int index)
     {
-        //Add one to our level number.
         level++;
-        //Call InitGame to initialize our level.
         InitGame();
     }
 
@@ -51,9 +48,14 @@ public class GameManager : MonoBehaviour {
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
         levelText.text = "Day " + level;
         levelImage.SetActive(true);
-        Invoke("HideLevelImage", levelStartDelay); 
-        boardScript.SetupScene(level);
+        Invoke("HideLevelImage", levelStartDelay);
+        boardScript.BoardSetup();
         enemies.Clear();
+    }
+
+    public void UpdateBoard(int horizantal, int vertical)
+    {
+        boardScript.AddToBoard(horizantal, vertical);
     }
 
     private void HideLevelImage()
